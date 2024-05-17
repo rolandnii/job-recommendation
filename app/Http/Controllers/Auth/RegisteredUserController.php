@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -30,6 +31,10 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $request->merge([
+            'name' =>  $request->input('first_name') . " " . $request->input('last_name')
+        ]);
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
@@ -37,10 +42,11 @@ class RegisteredUserController extends Controller
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->first_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+        ])->assignRole(Role::Student);
 
         event(new Registered($user));
 

@@ -1,19 +1,28 @@
 <!-- Navigation Bar-->
 <header id="topnav" class="defaultscroll scroll-active">
-    <!-- Tagline STart -->
-    <x-tagline />
-    <!-- Tagline End -->
-    <!-- Menu Start -->
+
+    <x-tagline/>
+
     <div class="container">
         <!-- Logo container-->
         <div>
             <a href="{{url('/')}}" class="logo">
-                <img src="{{asset('template/images/logo-light.png')}}" alt="" class="logo-light" height="18" />
-                <img src="{{asset('template/images/logo-dark.png')}}" alt="" class="logo-dark" height="18" />
+                <img src="{{asset('template/images/logo-light.png')}}" alt="" class="logo-light" height="18"/>
+                <img src="{{asset('template/images/logo-dark.png')}}" alt="" class="logo-dark" height="18"/>
             </a>
         </div>
         <div class="buy-button">
-            <a href="{{url('login')}}" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Login</a>
+            @guest()
+                <a href="{{url('login')}}" class="btn btn-primary hidden"><i class="mdi mdi-cloud-upload"></i> Login</a>
+            @endguest()
+            @auth()
+                <form action="{{route('logout')}}" method="post" id="LogoutForm">@csrf</form>
+                <button form="LogoutForm" type="submit" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i>
+                    Logout
+                </button>
+            @endauth
+
+
         </div><!--end login button-->
         <!--end login button-->
         <!-- End Logo container-->
@@ -44,7 +53,6 @@
 
             </ul><!--end navigation menu-->
         </div><!--end navigation-->
-    </div><!--end container-->
-    <!--end end-->
-</header><!--end header-->
-<!-- Navbar End -->
+    </div>
+
+</header>

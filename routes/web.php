@@ -18,9 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::middleware(['guest'])->group(function () {
-    Route::get('/', HomeController::class)->name('home');
-    Route::get('/jobs', [JobController::class,'index'])->name('guest.jobs');
+Route::get('/', HomeController::class)->name('home');
+Route::get('jobs', [JobController::class,'index'])->name('guest.jobs');
+Route::get('jobs/{job}', [JobController::class, 'show'])->name('guest.jobs.show');
+
+Route::get('/test', function () {
+    return request()->cookie('categories');
+});
+Route::middleware(['auth'])->group(function () {
+
 });
 
 

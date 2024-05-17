@@ -6,7 +6,7 @@
 
 <!-- selectize js -->
 <script src="{{asset('template/js/selectize.min.js')}}"></script>
-<script src="{{asset('template/js/jquery.nice-select.min.j')}}s"></script>
+<script src="{{asset('template/js/jquery.nice-select.min.js')}}"></script>
 
 <script src="{{asset('template/js/owl.carousel.min.js')}}"></script>
 <script src="{{asset('template/js/counter.int.js')}}"></script>
