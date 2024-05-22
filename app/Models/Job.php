@@ -22,7 +22,8 @@ class Job extends Model
         'skill',
         'location',
         'is_published',
-        'end_date'
+        'end_date',
+        'job_type',
     ];
 
     protected $casts = [

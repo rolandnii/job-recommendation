@@ -27,13 +27,13 @@ class BladeServiceProvider extends ServiceProvider
         Blade::anonymousComponentPath(resource_path('views/components/home'),'home');
         Blade::anonymousComponentPath(resource_path('views/components/job'),'job');
         Blade::if('admin', function () {
-            return request()->user()->hasRole(Role::Admin->value);
+            return request()->user()?->hasRole(Role::Admin->value);
         });
         Blade::if('company', function () {
-            return request()->user()->hasRole(Role::Company->value);
+            return request()->user()?->hasRole(Role::Company->value);
         });
         Blade::if('student',function () {
-            return request()->user()->hasRole(Role::Student->value);
+            return request()->user()?->hasRole(Role::Student->value);
         });
 
 

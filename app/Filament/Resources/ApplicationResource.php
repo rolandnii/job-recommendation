@@ -54,6 +54,7 @@ class ApplicationResource extends Resource
                     ->label('Applicant')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('job.name')
+                    ->label('Job')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

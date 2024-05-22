@@ -45,10 +45,11 @@ class CompanyResource extends Resource
                 Forms\Components\TextInput::make('location')
                     ->required(),
                 Forms\Components\TextInput::make('website'),
-                Forms\Components\MarkdownEditor::make('description')
+                    Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('logo')
                     ->image()
+                    ->disk('public')
                     ->previewable(false)
                 ->columnSpanFull()
                 ,

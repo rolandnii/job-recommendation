@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\JobType;
 use App\Filament\Resources\JobResource\Pages;
 use App\Filament\Resources\JobResource\RelationManagers;
 use App\Models\Category;
@@ -47,6 +48,9 @@ class JobResource extends Resource
                     ->preload()
                     ->searchable()
                     ->multiple(),
+                Forms\Components\ToggleButtons::make('job_type')
+                    ->options(JobType::class)
+                    ->inline(),
                 Forms\Components\RichEditor::make('description')
                     ->columnSpanFull()
                     ->required(),

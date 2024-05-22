@@ -15,12 +15,22 @@
             @guest()
                 <a href="{{url('login')}}" class="btn btn-primary hidden"><i class="mdi mdi-cloud-upload"></i> Login</a>
             @endguest()
-            @auth()
-                <form action="{{route('logout')}}" method="post" id="LogoutForm">@csrf</form>
-                <button form="LogoutForm" type="submit" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i>
-                    Logout
-                </button>
-            @endauth
+
+            @admin()
+            <a href="{{url('admin/')}}" class="btn btn-primary hidden"><i class="mdi mdi-cloud-upload"></i> Admin
+                Dashboard</a>
+            @endadmin
+
+            @company()
+            <a href="{{url('company/')}}" class="btn btn-primary hidden"><i class="mdi mdi-cloud-upload"></i> Company
+                Dashboard</a>
+            @endcompany
+            @student()
+            <form action="{{route('logout')}}" method="post" id="LogoutForm">@csrf</form>
+            <button form="LogoutForm" type="submit" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i>
+                Logout
+            </button>
+            @endstudent
 
 
         </div><!--end login button-->

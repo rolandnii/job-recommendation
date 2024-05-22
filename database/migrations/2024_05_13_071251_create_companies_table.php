@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->string('website')->nullable();
             $table->boolean('is_verified');
-            $table->json('category')->nullable();
+            $table->json('categories')->nullable();
             $table->timestamps();
         });
     }

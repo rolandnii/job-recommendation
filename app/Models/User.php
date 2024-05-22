@@ -31,6 +31,7 @@ class User extends Authenticatable implements HasName
         'password',
         'is_verified',
         'email_verified_at'
+
     ];
 
     /**
@@ -82,6 +83,12 @@ class User extends Authenticatable implements HasName
 
        return  $this->first_name . " " . $this->last_name;
    }
+
+   public function getDisplayNameAttribute()
+   {
+       return $this->phone ? "{$this->full_name} ({$this->phone})" : $this->full_name;
+   }
+
 
 
 
