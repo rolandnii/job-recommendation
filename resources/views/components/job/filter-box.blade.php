@@ -3,20 +3,12 @@
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="home-registration-form job-list-reg-form bg-light shadow p-4 mb-3">
-                    <form class="registration-form">
+                    <form class="registration-form" method="get" action="{{url('jobs')}}">
                         <div class="row">
                             <div class="col-lg-3 col-md-6">
                                 <div class="registration-form-box">
                                     <i class="fa fa-briefcase"></i>
-                                    <input type="text" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Job keybords...">
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <div class="registration-form-box">
-                                    <i class="fa fa-location-arrow"></i>
-                                    <select id="select-country" class="demo-default">
-
-                                    </select>
+                                    <input type="text" id="exampleInputName1" class="form-control rounded registration-input-box" name="search" placeholder="Job keybords...">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6">

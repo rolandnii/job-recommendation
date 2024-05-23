@@ -89,6 +89,10 @@ class User extends Authenticatable implements HasName
        return $this->phone ? "{$this->full_name} ({$this->phone})" : $this->full_name;
    }
 
+   public function getIsAdminAttribute()
+   {
+       return $this->hasRole('admin');
+   }
 
 
 

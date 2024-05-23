@@ -50,14 +50,28 @@
         </div>
     </div>
 
-    @auth()
-        <div class="job-detail border rounded mt-4">
-            <button class="btn btn-primary btn-block" form="applicationForm">Apply For Job</button>
-            <form action="{{url('apply-job')}}" method="post" id="applicationForm">
-                @csrf
-                @method('POST')
-                <input type="hidden" name="job_id" value="{{$job->id}}">
-            </form>
+
+
+    @if(session('apply-success'))
+        <div class="alert alert-success mt-4" role="alert">
+            {{session('apply-success')}}
         </div>
-    @endauth
+    @elseif($hasApplied)
+        <div class="job-detail border border-success text-success rounded mt-4 p-4">
+            You have  applied for this job
+        </div>
+    @else
+        @auth()
+            <div class="job-detail border rounded mt-4">
+                <button class="btn btn-primary btn-block" form="applicationForm">Apply For Job</button>
+                <form action="{{url('apply-job')}}" method="post" id="applicationForm">
+                    @csrf
+                    @method('POST')
+                    <input type="hidden" name="job_id" value="{{$job->id}}">
+                </form>
+            </div>
+        @endauth
+   @endif
+
+
 </div>

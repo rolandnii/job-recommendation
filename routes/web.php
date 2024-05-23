@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
@@ -26,8 +27,9 @@ Route::get('jobs/{job}', [JobController::class, 'show'])->name('guest.jobs.show'
 Route::get('/test', function () {
     return request()->cookie('categories');
 });
-Route::middleware(['auth'])->group(function () {
+Route::middleware('auth')->group(function () {
     Route::post('apply-job', JobApplicationController::class);
+    Route::get('my-applications',[ApplicationController::class,'index']);
 });
 
 

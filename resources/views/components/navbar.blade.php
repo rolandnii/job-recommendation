@@ -61,6 +61,12 @@
                     <a href="{{url('/companies')}}">Companies </a>
                 </li>
 
+                @student
+                <li class="has-submenu">
+                    <a href="{{url('/my-applications')}}">My Applications </a>
+                </li>
+                @endstudent
+
             </ul><!--end navigation menu-->
         </div><!--end navigation-->
     </div>

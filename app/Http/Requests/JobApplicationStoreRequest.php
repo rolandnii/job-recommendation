@@ -13,7 +13,7 @@ class JobApplicationStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->check() && $this->user()->hasRole('student');
+        return auth()->check() && ($this->user()->hasRole('student')||  $this->user()->roles()->doesntExist());
     }
 
     /**

@@ -75,7 +75,7 @@
 
 
                 </div>
-                <x-job.details-company-info :job="$job" />
+                <x-job.details-company-info :job="$job" :has-applied="$hasApplied" />
             </div>
         </div>
     </section>

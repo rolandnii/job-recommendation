@@ -12,6 +12,6 @@ class JobApplicationController extends Controller
         $data = $request->validated();
         $request->user()->applications()->create($data);
 
-        return back()->with('apply', 'Your application was successful');
+        return back()->with('apply-success', 'Your application was successful');
     }
 }

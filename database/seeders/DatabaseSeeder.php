@@ -52,7 +52,10 @@ class DatabaseSeeder extends Seeder
 //                'job_type' => collect(JobType::cases())->random()->value
 //            ])
 //        ->create();
-       $user = User::factory()->count(1)->verifyUser()->create();
-       $user->assignRole(['admin']);
+       $users = User::factory()->count(10)->verifyUser()->create();
+
+       foreach ($users as $user) {
+           $user->assignRole('student');
+       }
     }
 }

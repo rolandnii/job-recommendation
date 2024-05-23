@@ -14,6 +14,7 @@ class HomeController extends Controller
     public function __invoke(Request $request)
     {
 
+
         $jobs = Job::all();
 
         $recommendedJobs = $jobs->reject(function (Job $job) use ($request) {
