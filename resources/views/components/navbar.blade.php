@@ -57,13 +57,19 @@
                 <li class="has-submenu">
                     <a href="{{url('/jobs')}}">Jobs</a>
                 </li>
-                <li class="has-submenu">
-                    <a href="{{url('/companies')}}">Companies </a>
-                </li>
+{{--                <li class="has-submenu">--}}
+{{--                    <a href="{{url('/companies')}}">Companies </a>--}}
+{{--                </li>--}}
 
                 @student
                 <li class="has-submenu">
                     <a href="{{url('/my-applications')}}">My Applications </a>
+                </li>
+                @endstudent
+
+                @student
+                <li class="has-submenu">
+                    <a href="{{url('/my-profile')}}">Profile </a>
                 </li>
                 @endstudent
 

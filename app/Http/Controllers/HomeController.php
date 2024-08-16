@@ -15,7 +15,7 @@ class HomeController extends Controller
     {
 
 
-        $jobs = Job::all();
+        $jobs = Job::with(["user.company.company"])->get();
 
         $recommendedJobs = $jobs->reject(function (Job $job) use ($request) {
             $cookie = json_decode($request->cookie('categories')) ?? [];
@@ -28,7 +28,7 @@ class HomeController extends Controller
 
         $recommendedJobs = $recommendedJobs->shuffle();
 
-        $recentJobs = $jobs->toQuery()->latest()->paginate(1);
+        $recentJobs = $jobs->toQuery()->latest()->paginate(8);
 
 
 

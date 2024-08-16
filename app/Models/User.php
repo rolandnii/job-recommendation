@@ -28,10 +28,10 @@ class User extends Authenticatable implements HasName
         'last_name',
         'email',
         'phone',
+        'cv',
         'password',
         'is_verified',
-        'email_verified_at'
-
+        'email_verified_at',
     ];
 
     /**

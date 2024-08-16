@@ -32,7 +32,8 @@
                         <div class="row">
                             <div class="col-lg-12">
 
-                                @forelse($recommendedJobs->load('user.company') as $recommendedJob)
+                                @forelse($recommendedJobs as $recommendedJob)
+{{--                                    @php(dd($recommendedJob->user))--}}
                                     <div class="job-box bg-white overflow-hidden border rounded mt-4 position-relative overflow-hidden">
                                         <div class="lable text-center pt-2 pb-2">
                                             <ul class="list-unstyled best text-white mb-0 text-uppercase">
@@ -43,14 +44,15 @@
                                             <div class="row align-items-center">
                                                 <div class="col-md-2">
                                                     <div class="mo-mb-2">
-                                                        <img src="{{asset('storage/01HXSZS0KA1VGB6BYR4ZMZ4ZYC.png')}}" alt="" class="img-fluid mx-auto d-block">
+                                                        @php($image = $recommendedJob->user?->company?->company  ? $recommendedJob->user->company->company->logo  : $defaultImage)
+                                                        <img src="{{asset( 'storage/'.$image)}}" alt="" class="img-fluid mx-auto d-block">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div>
 
                                                         <h5 class="f-18"><a href="#" class="text-dark">{{$recommendedJob->name}}</a></h5>
-                                                        <p class="text-muted mb-0">{{ $recommendedJob->user->company ? $recommendedJobs->user->company->name  : 'Admin' }}</p>
+                                                        <p class="text-muted mb-0">{{ $recommendedJob->user?->company?->id ? $recommendedJob->user?->company?->company?->name  : 'Admin' }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
@@ -79,7 +81,7 @@
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div>
-                                                        <a href="#" class="text-primary">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
+                                                        <a href="{{url('jobs/'.$recommendedJob->id)}}" class="text-primary">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -99,7 +101,7 @@
                     <div class="tab-pane fade" id="recent-job" role="tabpanel" aria-labelledby="recent-job-tab">
                         <div class="row">
                             <div class="col-lg-12">
-                                @forelse($recentJobs->load('user.company') as $recentJob)
+                                @forelse($recentJobs->load('user.company.company') as $recentJob)
                                     <div class="job-box bg-white overflow-hidden border rounded mt-4 position-relative overflow-hidden">
 {{--                                        <div class="lable text-center pt-2 pb-2">--}}
 {{--                                            <ul class="list-unstyled best text-white mb-0 text-uppercase">--}}
@@ -110,7 +112,7 @@
                                             <div class="row align-items-center">
                                                 <div class="col-md-2">
                                                     <div class="mo-mb-2">
-                                                        @php($image = $recentJob->user->company  ? $recentJob->user->company->logo  : $defaultImage)
+                                                        @php($image = $recentJob->user?->company?->company  ? $recentJob->user->company->company->logo  : $defaultImage)
                                                         <img src="{{asset( 'storage/'.$image)}}" alt="" class="img-fluid mx-auto d-block">
                                                     </div>
                                                 </div>
@@ -118,7 +120,7 @@
                                                     <div>
 
                                                         <h5 class="f-18"><a href="#" class="text-dark">{{$recentJob->name}}</a></h5>
-                                                        <p class="text-muted mb-0">{{ $recentJob->user->company ? $recentJob->user->company->name  : 'Admin' }}</p>
+                                                        <p class="text-muted mb-0">{{ $recentJob->user?->company?->company ? $recentJob->user->company->company->name  : 'Admin' }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">

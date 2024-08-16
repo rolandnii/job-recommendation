@@ -5,15 +5,20 @@ namespace App\Filament\Resources;
 use App\Enums\Role;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Models\Company;
+use App\Models\CompanyUser;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Arr;
 
@@ -82,7 +87,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('roles.name')
-                ->searchable(),
+                    ->searchable(),
                 Tables\Columns\IconColumn::make('email_verified_at')
                     ->boolean()
                     ->default(false)
@@ -101,7 +106,23 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make("company_full_table")
+                    ->infolist([
+                        TextEntry::make("company.company.name")
+                            ->label("Name")
+                        ->default("null")
+
+
+                    ])
+                    ->label("company")
+                    ->visible(function (Model $record) {
+                        return $record->hasRole("company");
+                    })
+                    ->modalWidth(MaxWidth::Medium),
+
                 Tables\Actions\EditAction::make(),
+
+
                 Tables\Actions\Action::make('add_role')
                     ->label('Add role')
                     ->form([
@@ -110,13 +131,29 @@ class UserResource extends Resource
                             ->options(Role::class)
                             ->required()
                             ->markAsRequired(false)
-                        ->inline()
+                            ->live()
+                            ->inline(),
+                        Forms\Components\Select::make('company')
+                            ->options(fn() => Company::all()->pluck("name", "id"))
+                            ->searchable()
+                            ->preload()
+                            ->requiredIf("user_role", "company")
+                            ->markAsRequired(false)
+                            ->visible(function (Forms\Get $get) {
+                                return $get("user_role") == "company";
+                            }),
+
                     ])
                     ->modalWidth(MaxWidth::Medium)
                     ->action(function (array $data, User $user): void {
 
-                        $user->syncRoles(Arr::flatten($data));
-
+                        $user->syncRoles([$data["user_role"]]);
+                        auth()->user()->company()->delete();
+                        if ($data['user_role'] == "company") {
+                            auth()->user()->company()->create([
+                                'company_id' => $data["company"]
+                            ]);
+                        }
                         Notification::make('')
                             ->success()
                             ->body('user role change')

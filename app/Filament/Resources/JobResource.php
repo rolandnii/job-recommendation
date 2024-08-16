@@ -35,6 +35,7 @@ class JobResource extends Resource
                     ->required()
                     ->getOptionLabelFromRecordUsing(fn(Model $model) => $model->full_name)
                     ->hiddenOn(['create', 'edit']),
+
                 Forms\Components\TextInput::make('name')
                     ->required(),
                 Forms\Components\TextInput::make('salary')

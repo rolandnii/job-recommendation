@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\ApplicationStatus;
 use App\Filament\Resources\ApplicationResource\Pages;
 use App\Filament\Resources\ApplicationResource\RelationManagers;
 use App\Models\Application;
@@ -40,9 +41,13 @@ class ApplicationResource extends Resource
                     ->relationship('job', 'name')
                     ->required()
                     ->searchable()
+
                     ->preload()
-                ->native(false)
+                    ->native(false)
                 ,
+                Forms\Components\ToggleButtons::make('status')
+                    ->options(ApplicationStatus::class)
+                    ->inline()
             ]);
     }
 
@@ -55,6 +60,14 @@ class ApplicationResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('job.name')
                     ->label('Job')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('user.cv')
+                    ->url(fn(Model $record) => asset("storage/" . $record->user->cv), true)
+                    ->label("CV")
+                ,
+                Tables\Columns\TextColumn::make('status')
+                    ->label('Status')
+                    ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

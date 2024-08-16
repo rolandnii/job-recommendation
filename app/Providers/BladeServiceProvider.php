@@ -35,7 +35,7 @@ class BladeServiceProvider extends ServiceProvider
 
         Blade::if('student',function () {
 
-            return request()->user()->roles()->doesntExist() || request()->user()?->hasRole(Role::Student->value);
+            return request()->user()?->roles()->doesntExist() || request()->user()?->hasRole(Role::Student->value);
 //            return true;
         });
 

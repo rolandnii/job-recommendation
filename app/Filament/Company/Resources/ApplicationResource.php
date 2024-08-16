@@ -59,6 +59,14 @@ class ApplicationResource extends Resource
                 Tables\Columns\TextColumn::make('job.name')
                     ->label('Job')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->label('Status')
+                    ->badge()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('user.cv')
+                    ->url(fn(Model $record) => asset("storage/" . $record->user->cv), true)
+                    ->label("CV")
+                ,
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

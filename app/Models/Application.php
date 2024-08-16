@@ -12,7 +12,8 @@ class Application extends Model
 
     protected  $fillable = [
         'user_id',
-        'job_id'
+        'job_id',
+        'status',
     ];
     public function job() : BelongsTo
     {

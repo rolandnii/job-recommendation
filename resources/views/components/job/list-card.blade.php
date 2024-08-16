@@ -4,7 +4,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-2">
                     <div class="company-logo-img">
-{{--                        <img src="{{asset('template/images/featured-job/img-1.png')}}" alt="" class="img-fluid mx-auto d-block">--}}
+                        <img src="{{asset('storage/01HXSZS0KA1VGB6BYR4ZMZ4ZYC.png')}}" alt="" class="img-fluid mx-auto d-block">
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-9">
